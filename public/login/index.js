@@ -26,7 +26,7 @@ async function sendData(resposta) {
     })
     .catch((error) => {
       if (error.response.data === false) {
-        alert("cheque suas crendências.");
+        alert("cheque suas crendencias.");
       }
     });
 }
