@@ -1,18 +1,35 @@
-function formContato() {
+async function formCadastro() {
   const name = document.querySelector(".name").value;
   const email = document.querySelector(".email").value;
   const password = document.querySelector(".password").value;
 
-  const resposta = {
-    name: name,
-    email: email,
-    password: password,
-  };
+  const resposta = { name, email, password };
 
-  axios
+  const regex =
+    /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+
+  if (!regex.test(email)) {
+    alert("E-mail invalido, verificar credencias.");
+    email.focus;
+    return false;
+  }
+
+  EnviarCadastro(resposta);
+}
+
+async function EnviarCadastro(resposta) {
+  await axios
     .post("http://localhost:3333/contato", resposta)
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
+    .then((res) => {
+      if (res) {
+        location.href = "../login/index.html";
+      }
+    })
+    .catch((error) => {
+      if (error) {
+        alert("error");
+      }
+    });
 }
 
 function verificar() {
@@ -25,3 +42,9 @@ function verificar() {
   }
 }
 verificar();
+
+/*
+name === null && email === null
+  ? false
+  : (location.href = "../dash/index.html");
+*/

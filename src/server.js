@@ -20,9 +20,11 @@ app.post("/contato", (req, res) => {
 
     cadastro.push(resposta);
 
-    return res.json(resposta);
+    console.table([resposta]);
+
+    return res.status(200).json(resposta);
   } catch (error) {
-    return res.json({ error: "Erro no envio!" });
+    return res.status(400).json({ error: "Erro no envio!" });
   }
 });
 
