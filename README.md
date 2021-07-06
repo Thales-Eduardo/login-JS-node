@@ -3,9 +3,10 @@
 Fiz esse exercício apenas para praticar um pouco 🐱‍💻.
 
 - Os dados são persistidos em um arquivo json.
-- Por enquanto a função para listar e salvar esta assim.
 
-```bash
+# Código para listar e salvar dados no arquivo.
+
+```js
 import { readFile, writeFile } from "fs/promises";
 import { join } from "path";
 
@@ -25,9 +26,9 @@ class Repository {
 }
 
 export default new Repository();
-
 ```
 
-[] - Extrair regra de negócio da rota.
-[] - Extrair rotas do server.
-[] - Proibir e-mail repetidos.
+- [x] - Extrair rotas do server.
+- [] - Extrair regra de negócio da rota.
+- [] - Proibir e-mail repetidos.
+- [] - criptografar senha bjscripto
