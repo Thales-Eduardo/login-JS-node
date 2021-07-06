@@ -19,7 +19,7 @@ async function formCadastro() {
 
 async function EnviarCadastro(resposta) {
   await axios
-    .post("http://localhost:3333/contato", resposta)
+    .post("http://localhost:3333/cadastro", resposta)
     .then((res) => {
       if (res) {
         location.href = "../login/index.html";

@@ -1,5 +1,8 @@
 import express from "express";
 import cors from "cors";
+import { v4 as uuid } from "uuid";
+
+import Repository from "./repository/Repository";
 
 const app = express();
 
@@ -11,37 +14,49 @@ app.use(
   })
 );
 
-const cadastro = [];
+app.get("/", async (req, res) => {
+  const currentContent = await Repository.findData();
+  delete currentContent.password;
+  return res.send(currentContent);
+});
 
-app.post("/contato", (req, res) => {
+app.post("/cadastro", async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    const resposta = { name, email, password };
+    const currentContent = await Repository.findData();
+    const resposta = { id: uuid(), name, email, password };
+    currentContent.push(resposta);
 
-    cadastro.push(resposta);
+    await Repository.saveData(currentContent);
 
-    console.table([resposta]);
-
+    delete resposta.password;
     return res.status(200).json(resposta);
   } catch (error) {
+    console.log(error);
     return res.status(400).json({ error: "Erro no envio!" });
   }
 });
 
-app.post("/log", (req, res) => {
-  const { password, email } = req.body;
+app.post("/log", async (req, res) => {
+  try {
+    const { password, email } = req.body;
 
-  const verificar = cadastro.find(
-    (data) => data.email === email && data.password === password
-  );
+    const currentContent = await Repository.findData();
 
-  if (!verificar) {
-    return res.status(400).json(false);
+    const verificar = currentContent.find(
+      (data) => data.email === email && data.password === password
+    );
+
+    if (!verificar) {
+      return res.status(400).json(false);
+    }
+
+    delete verificar.password;
+
+    return res.status(200).json(verificar);
+  } catch (error) {
+    console.log(error);
   }
-
-  delete verificar.password;
-
-  return res.status(200).json(verificar);
 });
 
 app.listen(3333, () => {
