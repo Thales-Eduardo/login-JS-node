@@ -30,5 +30,4 @@ export default new Repository();
 
 [] - Extrair regra de negócio da rota.
 [] - Extrair rotas do server.
-[] - Extrair dependência do Repositório.
 [] - Proibir e-mail repetidos.
