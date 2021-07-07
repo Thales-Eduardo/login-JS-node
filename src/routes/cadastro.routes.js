@@ -1,24 +1,24 @@
-import { Router } from "express";
-import { v4 as uuid } from "uuid";
+import { Router } from 'express';
 
-import Repository from "../repository/Repository";
+import CreateUserServices from '../services/CreateUserServices';
 
 const cadastro = Router();
 
-cadastro.post("/", async (req, res) => {
+cadastro.post('/', async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    const currentContent = await Repository.findData();
-    const resposta = { id: uuid(), name, email, password };
-    currentContent.push(resposta);
+    const CreateUser = new CreateUserServices();
 
-    await Repository.saveData(currentContent);
+    const user = await CreateUser.execute({
+      name,
+      email,
+      password,
+    });
 
-    delete resposta.password;
-    return res.status(200).json(resposta);
+    delete user.password;
+    return res.status(200).json(user);
   } catch (error) {
-    console.log(error);
-    return res.status(400).json({ error: "Erro no envio!" });
+    return res.status(404).json(error.message);
   }
 });
 

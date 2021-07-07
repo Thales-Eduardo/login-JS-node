@@ -1,28 +1,25 @@
-import { Router } from "express";
+import { Router } from 'express';
 
-import Repository from "../repository/Repository";
+import AuthenticateUserServices from '../services/AuthenticateUserServices';
 
 const login = Router();
 
-login.post("/log", async (req, res) => {
+login.post('/', async (req, res) => {
   try {
     const { password, email } = req.body;
 
-    const currentContent = await Repository.findData();
+    const authenticateUser = new AuthenticateUserServices();
 
-    const verificar = currentContent.find(
-      (data) => data.email === email && data.password === password
-    );
+    const user = await authenticateUser.execute({
+      password,
+      email,
+    });
 
-    if (!verificar) {
-      return res.status(400).json(false);
-    }
+    delete user.password;
 
-    delete verificar.password;
-
-    return res.status(200).json(verificar);
+    return res.status(200).json(user);
   } catch (error) {
-    console.log(error);
+    return res.status(404).json(error.message);
   }
 });
 

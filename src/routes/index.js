@@ -1,11 +1,11 @@
-import { Router } from "express";
+import { Router } from 'express';
 
-import cadastroRoutes from "./cadastro.routes";
-import loginRoutes from "./login.routes";
+import cadastroRoutes from './cadastro.routes';
+import loginRoutes from './login.routes';
 
 const router = Router();
 
-router.use("/cadastro", cadastroRoutes);
-router.use("/log", loginRoutes);
+router.use('/cadastro', cadastroRoutes);
+router.use('/log', loginRoutes);
 
 export default router;

@@ -7,28 +7,23 @@ Fiz esse exercício apenas para praticar um pouco 🐱‍💻.
 # Código para listar e salvar dados no arquivo.
 
 ```js
-import { readFile, writeFile } from "fs/promises";
-import { join } from "path";
+import { readFile, writeFile } from 'fs/promises';
+import { join } from 'path';
 
-const fileName = join(__dirname, "../database", "data.json");
+const fileName = join(__dirname, '../database', 'data.json');
 
 class Repository {
   async findData() {
-    const current = await readFile(fileName, "utf-8");
+    const current = await readFile(fileName, 'utf-8');
     return JSON.parse(current);
   }
 
   async saveData(data) {
     const currentFile = JSON.stringify(data);
-    await writeFile(fileName, currentFile, "utf-8");
+    await writeFile(fileName, currentFile, 'utf-8');
     return data;
   }
 }
 
 export default new Repository();
 ```
-
-- [x] - Extrair rotas do server.
-- [] - Extrair regra de negócio da rota.
-- [] - Proibir e-mail repetidos.
-- [] - criptografar senha bjscripto
