@@ -1,4 +1,4 @@
-import { compare } from 'bcryptjs';
+import { compareSync } from 'bcryptjs';
 
 import Repository from '../repository/Repository';
 
@@ -6,8 +6,8 @@ class AuthenticateUserServices {
   async execute({ password, email }) {
     const currentContent = await Repository.findData();
 
-    const verificarPassword = await currentContent.find(data =>
-      compare(password, data.password)
+    const verificarPassword = currentContent.find(data =>
+      compareSync(password, data.password)
     );
 
     if (!verificarPassword) {

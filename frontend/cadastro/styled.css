@@ -23,13 +23,6 @@ strong {
   font-weight: 600;
 }
 
-a {
-  color: #fff;
-  margin-top: 15px;
-  font-size: 21px;
-  text-decoration: none;
-}
-
 h1 {
   font-size: 33px;
   color: white;
@@ -38,6 +31,13 @@ h1 {
 
 button {
   cursor: pointer;
+}
+
+a {
+  color: #fff;
+  margin-top: 15px;
+  font-size: 21px;
+  text-decoration: none;
 }
 
 section {
@@ -115,32 +115,13 @@ form {
   color: #fff;
 }
 
-.mensagem {
-  height: 170px;
-  width: 90%;
-
-  display: block;
-  margin: auto;
-  margin-top: 20px;
-  padding: 10px;
-  font-size: 16px;
-  color: #fff;
-  background-color: #312e38;
-  border: 2px solid #fff;
-  resize: none;
-}
-
-.mensagem::placeholder {
-  color: #fff;
-}
-
 .butt {
   height: 40px;
   width: 90%;
 
   display: block;
   margin: auto;
-  margin-top: 20px;
+  margin-top: 40px;
   padding: 10px;
   font-size: 20px;
   font-weight: 700;

@@ -23,6 +23,13 @@ strong {
   font-weight: 600;
 }
 
+a {
+  color: #fff;
+  margin-top: 15px;
+  font-size: 21px;
+  text-decoration: none;
+}
+
 h1 {
   font-size: 33px;
   color: white;
@@ -31,13 +38,6 @@ h1 {
 
 button {
   cursor: pointer;
-}
-
-a {
-  color: #fff;
-  margin-top: 15px;
-  font-size: 21px;
-  text-decoration: none;
 }
 
 section {
@@ -51,30 +51,11 @@ section {
 
 form {
   height: 500px;
-  width: 400px;
+  width: 360px;
   align-items: center;
   justify-content: center;
 
   border: 3px dashed white;
-}
-
-.name {
-  height: 40px;
-  width: 90%;
-
-  display: block;
-  margin: auto;
-  margin-top: 40px;
-  padding: 10px;
-  font-size: 16px;
-  color: #fff;
-  background-color: #312e38;
-  border: 0;
-  border-bottom: 2px solid #fff;
-}
-
-.name::placeholder {
-  color: #fff;
 }
 
 .email {
@@ -112,25 +93,6 @@ form {
 }
 
 .password::placeholder {
-  color: #fff;
-}
-
-.mensagem {
-  height: 170px;
-  width: 90%;
-
-  display: block;
-  margin: auto;
-  margin-top: 20px;
-  padding: 10px;
-  font-size: 16px;
-  color: #fff;
-  background-color: #312e38;
-  border: 2px solid #fff;
-  resize: none;
-}
-
-.mensagem::placeholder {
   color: #fff;
 }
 

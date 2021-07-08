@@ -29,17 +29,28 @@ h1 {
   margin-bottom: 8px;
 }
 
+header {
+  padding: 20px 0px;
+  width: 100%;
+  height: 100px;
+  background-color: #434246;
+}
+
+.container {
+  max-width: 1220px;
+  margin: 0 auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
 button {
   cursor: pointer;
   font-size: 20px;
   height: 30px;
   width: 80px;
-}
-
-header {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
