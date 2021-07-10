@@ -49,7 +49,8 @@ async function EnviarCadastro(resposta) {
 function verificar() {
   const name = localStorage.getItem('@NAME');
   const email = localStorage.getItem('@EMAIL');
-  if (name === null && email === null) {
+  const id = localStorage.getItem('@ID');
+  if (name === null && email === null && id === null) {
     return;
   } else {
     location.href = '../dash/index.html';

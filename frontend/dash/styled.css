@@ -48,9 +48,27 @@ header {
   justify-content: space-between;
 }
 
-button {
+#sair {
   cursor: pointer;
   font-size: 20px;
-  height: 30px;
+  height: 40px;
   width: 80px;
+}
+
+section {
+  /* background-color: #fff; */
+  height: 89%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  border: 1px solid #fff;
+  height: 420px;
+  width: 320px;
 }

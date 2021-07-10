@@ -1,16 +1,10 @@
-import { compareSync } from 'bcryptjs';
+import { compareSync, hashSync } from 'bcryptjs';
 
 import Repository from '../repository/Repository';
 
-class AuthenticateUserServices {
-  async execute({ id, name, email, oldPassword, newPassword }) {
+class ProfileUpdateServices {
+  async execute({ id, name, email, oldPassword, password }) {
     const currentContent = await Repository.findData();
-
-    const user = currentContent.findIndex(data => data.id === id);
-
-    if (!user) {
-      throw new Error('Token JWT invalido');
-    }
 
     const verificarEmail = currentContent.find(data => data.email === email);
 
@@ -24,20 +18,42 @@ class AuthenticateUserServices {
 
     if (!verificarPassword) {
       throw new Error(
-        'Para atualizar sua senha, informe sua antiga senha correto!'
+        'Para atualizar sua senha, informe sua antiga senha correta!'
       );
     }
 
-    const hashedPassword = await hash(newPassword, 8);
+    const user = currentContent.findIndex(data => data.id === id);
+    console.log('passo aq ' + user);
 
-    const resposta = { name, email, password: hashedPassword };
+    if (user < 0) {
+      throw new Error('Esse usário não existe.');
+    }
 
-    currentContent.push(resposta);
+    const {
+      id: nId,
+      name: nName,
+      email: nEmail,
+      password: nPassword,
+    } = currentContent[user];
+
+    const update = {
+      id: nId,
+      name: name ? name : nName,
+      email: email ? email : nEmail,
+      password: password ? password : nPassword,
+    };
+
+    currentContent[user] = update;
+
+    currentContent.find(data => {
+      const hashedPassword = hashSync(password, 8);
+      return (data.password = hashedPassword);
+    });
 
     await Repository.saveData(currentContent);
 
-    return resposta;
+    return update;
   }
 }
 
-export default AuthenticateUserServices;
+export default ProfileUpdateServices;

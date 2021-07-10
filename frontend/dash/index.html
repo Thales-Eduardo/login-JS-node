@@ -12,11 +12,27 @@
       <div class="container">
         <div class="content">
           <h1 id="user">Olá</h1>
-          <button onclick="sair()">Sair</button>
+          <button id="sair" onclick="sair()">Sair</button>
         </div>
       </div>
     </header>
 
+    <section>
+      <form>
+        <input id="name" type="text" placeholder="name" />
+        <input id="email" type="text" placeholder="E-mail" />
+        <input id="old_password" type="text" placeholder="Senha antiga" />
+        <input id="new_password" type="text" placeholder="Nova senha" />
+        <input
+          id="password_confirmation"
+          type="text"
+          placeholder="Confirmação da nova senha"
+        />
+        <button onclick="treatments()" type="button">Update</button>
+      </form>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="index.js"></script>
   </body>
 </html>
