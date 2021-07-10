@@ -29,21 +29,12 @@ class ProfileUpdateServices {
       throw new Error('Esse usário não existe.');
     }
 
-    const {
-      id: nId,
-      name: nName,
-      email: nEmail,
-      password: nPassword,
-    } = currentContent[user];
-
-    const update = {
-      id: nId,
-      name: name ? name : nName,
-      email: email ? email : nEmail,
-      password: password ? password : nPassword,
+    currentContent[user] = {
+      id,
+      name: name ? name : currentContent[user].name,
+      email: email ? email : currentContent[user].email,
+      password: password ? password : currentContent[user].password,
     };
-
-    currentContent[user] = update;
 
     currentContent.find(data => {
       const hashedPassword = hashSync(password, 8);
@@ -52,6 +43,7 @@ class ProfileUpdateServices {
 
     await Repository.saveData(currentContent);
 
+    const update = { id, name, email, password };
     return update;
   }
 }
