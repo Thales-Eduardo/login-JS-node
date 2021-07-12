@@ -1,4 +1,4 @@
-import { compareSync, hashSync } from 'bcryptjs';
+import { compareSync, hash } from 'bcryptjs';
 
 import Repository from '../repository/Repository';
 
@@ -28,7 +28,7 @@ class ProfileUpdateServices {
       throw new Error('Esse usário não existe.');
     }
 
-    const hashedPassword = hashSync(password, 8);
+    const hashedPassword = await hash(password, 8);
 
     currentContent[user] = {
       id,
