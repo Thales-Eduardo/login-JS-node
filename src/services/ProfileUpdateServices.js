@@ -23,28 +23,23 @@ class ProfileUpdateServices {
     }
 
     const user = currentContent.findIndex(data => data.id === id);
-    console.log('passo aq ' + user);
 
     if (user < 0) {
       throw new Error('Esse usário não existe.');
     }
 
+    const hashedPassword = hashSync(password, 8);
+
     currentContent[user] = {
       id,
       name: name ? name : currentContent[user].name,
       email: email ? email : currentContent[user].email,
-      password: password ? password : currentContent[user].password,
+      password: password ? hashedPassword : currentContent[user].password,
     };
-
-    currentContent.find(data => {
-      const hashedPassword = hashSync(password, 8);
-      return (data.password = hashedPassword);
-    });
 
     await Repository.saveData(currentContent);
 
-    const update = { id, name, email, password };
-    return update;
+    return { id, name, email, password };
   }
 }
 
