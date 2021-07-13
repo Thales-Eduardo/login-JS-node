@@ -1,20 +1,9 @@
 [
   {
-    "id": "ad289458-51a4-4723-9c43-7c92c27cb73e",
-    "name": "thales eduardo",
-    "email": "thalesdev@gmail.com",
-    "password": "$2a$08$eYpZW3lKHlhWH5Dc/hA7kuu9Mku5Vt4IAULhbbDeiXBPHdaFbophK"
-  },
-  {
-    "id": "313f0268-5bdd-4711-ba7c-22730b3e62c3",
+    "id": "a1833ce5-a829-4b89-9d48-6ec2499cc3ba",
     "name": "thales",
     "email": "thalesdev22@gmail.com",
-    "password": "$2a$08$gkXCvVnLAYpFovBq0SdXVekp1r.gNCQm0D4DjIjTujQ3BgHLfNrBi"
-  },
-  {
-    "id": "9a42e436-11c6-4353-8170-36a17cae2413",
-    "name": "thales",
-    "email": "tata@gmail.com",
-    "password": "$2a$08$RbXRwd2/TRAQJBjAGSXrcOJ18Anh/GBDYQ2WTJTmJaI1JVFbDpt9G"
+    "password": "$2a$08$drIZ9MwAzHaYQyi7ljuaG.CWzKNAcKjUZEkfAB8581GwsdB/qoM.6",
+    "avatar": "ed063210bbdbfb97c423-8f5f62d5b40af8b6e30ffb33982ac881.jpg"
   }
 ]

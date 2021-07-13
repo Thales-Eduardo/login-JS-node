@@ -15,7 +15,13 @@ class CreateUserServices {
       throw new Error('Esse email já existe!');
     }
 
-    const resposta = { id: uuid(), name, email, password: hashedPassword };
+    const resposta = {
+      id: uuid(),
+      name,
+      email,
+      password: hashedPassword,
+      avatar: '',
+    };
 
     currentContent.push(resposta);
 
