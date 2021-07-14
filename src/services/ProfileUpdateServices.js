@@ -30,12 +30,14 @@ class ProfileUpdateServices {
 
     const hashedPassword = await hash(password, 8);
 
+    let avatar = 'defalt';
+
     currentContent[user] = {
       id,
       name: name ? name : currentContent[user].name,
       email: email ? email : currentContent[user].email,
       password: password ? hashedPassword : currentContent[user].password,
-      avatar: 'default',
+      avatar: avatar ? currentContent[user].avatar : avatar,
     };
 
     await Repository.saveData(currentContent);
