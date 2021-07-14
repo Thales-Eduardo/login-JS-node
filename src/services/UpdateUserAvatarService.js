@@ -2,7 +2,7 @@ import DiscStorageRepository from '../repository/DiscStorageRepository';
 import Repository from '../repository/Repository';
 
 class UpdateUserAvatarService {
-  async execute({ avatar }) {
+  async execute({ id, avatar }) {
     const content = await Repository.findData();
 
     const checkAvatar = content.find(data => data.avatar);
@@ -10,11 +10,18 @@ class UpdateUserAvatarService {
     if (checkAvatar.avatar) {
       await DiscStorageRepository.deleteFile(checkAvatar.avatar);
     }
-    //salvar o nome do arquivo no avatar
 
-    await DiscStorageRepository.saveFile(avatar);
+    const user = content.findIndex(data => data.id === id);
 
-    return 'ok';
+    if (user < 0) {
+      throw new Error('Usuário não encontrado.');
+    }
+
+    content[user].avatar = avatar;
+
+    await Repository.saveData(content);
+
+    return checkAvatar;
   }
 }
 

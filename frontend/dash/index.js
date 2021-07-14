@@ -1,9 +1,11 @@
 function verificar() {
-  const name = localStorage.getItem('@NAME');
-  const email = localStorage.getItem('@EMAIL');
-  const id = localStorage.getItem('@ID');
+  const name = localStorage.getItem('$NAME');
+  const email = localStorage.getItem('$EMAIL');
+  const id = localStorage.getItem('$ID');
+  const avatar = localStorage.getItem('$AVATAR');
+
   const user = document.querySelector('#user');
-  if (name === null && email === null && id === null) {
+  if (name === null && email === null && id === null && avatar === null) {
     location.href = '../login/index.html';
   }
   preview(name, email);
@@ -12,9 +14,10 @@ function verificar() {
 verificar();
 
 function sair() {
-  localStorage.removeItem('@NAME');
-  localStorage.removeItem('@EMAIL');
-  localStorage.removeItem('@ID');
+  localStorage.removeItem('$NAME');
+  localStorage.removeItem('$EMAIL');
+  localStorage.removeItem('$ID');
+  localStorage.removeItem('$AVATAR');
   verificar();
 }
 
@@ -31,7 +34,6 @@ function treatments() {
   const password_confirmation = document.querySelector(
     '#password_confirmation'
   ).value;
-  //tratar todos os input com regex
 
   sendData({ name, email, oldPassword, password, password_confirmation });
 }
@@ -40,7 +42,7 @@ async function sendData(resposta) {
   const id = localStorage.getItem('@ID');
   await axios
     .post(`http://localhost:3333/profile/${id}`, resposta)
-    .then(res => {
+    .then(() => {
       alert('update confirmado!');
     })
     .catch(error => {

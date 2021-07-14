@@ -27,3 +27,7 @@ class Repository {
 
 export default new Repository();
 ```
+
+- para visualizar o arquivo.
+
+http://localhost:3333/files/nome_do_arquivo

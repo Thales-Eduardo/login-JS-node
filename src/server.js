@@ -1,10 +1,13 @@
 import express from 'express';
 import cors from 'cors';
 
+import uploadConfig from './config/upload';
+
 import router from './routes';
 const app = express();
 
 app.use(express.json());
+app.use('/files', express.static(uploadConfig.directory));
 
 app.use(
   cors({

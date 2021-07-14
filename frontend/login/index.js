@@ -24,10 +24,11 @@ async function sendData(resposta) {
   await axios
     .post('http://localhost:3333/log', resposta)
     .then(res => {
-      const { name, email, id } = res.data;
-      localStorage.setItem('@NAME', name);
-      localStorage.setItem('@EMAIL', email);
-      localStorage.setItem('@ID', id);
+      const { name, email, id, avatar } = res.data;
+      localStorage.setItem('$NAME', name);
+      localStorage.setItem('$EMAIL', email);
+      localStorage.setItem('$ID', id);
+      localStorage.setItem('$AVATAR', avatar);
       verificar();
     })
     .catch(error => {
@@ -38,18 +39,7 @@ async function sendData(resposta) {
 }
 
 function verificar() {
-  const name = localStorage.getItem('@NAME');
-  const email = localStorage.getItem('@EMAIL');
-  const id = localStorage.getItem('@ID');
-  if (name === null && email === null && id === null) {
-    return;
-  } else {
-    location.href = '../dash/index.html';
-  }
+  const id = localStorage.getItem('$ID');
+  id === null ? false : (location.href = '../dash/index.html');
 }
 verificar();
-/*
-name === null && email === null
-  ? false
-  : (location.href = "../dash/index.html");
-*/

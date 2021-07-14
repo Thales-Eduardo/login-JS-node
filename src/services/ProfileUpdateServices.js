@@ -35,6 +35,7 @@ class ProfileUpdateServices {
       name: name ? name : currentContent[user].name,
       email: email ? email : currentContent[user].email,
       password: password ? hashedPassword : currentContent[user].password,
+      avatar: 'default',
     };
 
     await Repository.saveData(currentContent);

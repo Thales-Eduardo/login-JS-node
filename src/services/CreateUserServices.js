@@ -20,7 +20,7 @@ class CreateUserServices {
       name,
       email,
       password: hashedPassword,
-      avatar: '',
+      avatar: 'default',
     };
 
     currentContent.push(resposta);
