@@ -1,5 +1,4 @@
-import { compareSync } from 'bcryptjs';
-
+import BCriptHashProvider from '../providers/bcryptjsProvider/BCriptHashProvider';
 import Repository from '../repository/Repository';
 
 class AuthenticateUserServices {
@@ -7,7 +6,7 @@ class AuthenticateUserServices {
     const currentContent = await Repository.findData();
 
     const verificarPassword = currentContent.find(data =>
-      compareSync(password, data.password)
+      BCriptHashProvider.compareHash(password, data.password)
     );
 
     if (!verificarPassword) {

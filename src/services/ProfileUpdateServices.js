@@ -1,5 +1,4 @@
-import { compareSync, hash } from 'bcryptjs';
-
+import BCriptHashProvider from '../providers/bcryptjsProvider/BCriptHashProvider';
 import Repository from '../repository/Repository';
 
 class ProfileUpdateServices {
@@ -14,7 +13,7 @@ class ProfileUpdateServices {
 
     if (password && oldPassword) {
       const verificarPassword = currentContent.find(data =>
-        compareSync(oldPassword, data.password)
+        BCriptHashProvider.compareHash(oldPassword, data.password)
       );
 
       if (!verificarPassword) {
@@ -30,7 +29,7 @@ class ProfileUpdateServices {
       throw new Error('Esse usário não existe.');
     }
 
-    const hashedPassword = await hash(password, 8);
+    const hashedPassword = await BCriptHashProvider.generateHash(password);
 
     let avatar = 'defalt';
 

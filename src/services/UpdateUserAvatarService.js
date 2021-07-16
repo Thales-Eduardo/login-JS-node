@@ -1,4 +1,4 @@
-import DiscStorageRepository from '../repository/DiscStorageRepository';
+import DiscStorageRepository from '../providers/multerProvider/DiscStorageProvider';
 import Repository from '../repository/Repository';
 
 class UpdateUserAvatarService {
