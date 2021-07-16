@@ -11,24 +11,32 @@
     <header>
       <div class="container">
         <div class="content">
-          <h1 id="user">Olá</h1>
+          <h1 id="user">Olá,</h1>
+
           <button id="sair" onclick="sair()">Sair</button>
         </div>
       </div>
     </header>
 
     <section>
+      <div class="image_user">
+        <label for="avatar">
+          <img src="" alt="foto" />
+          <input type="file" id="avatar" onchange="image(event)" />
+        </label>
+      </div>
+
       <form>
         <input id="name" type="text" placeholder="name" />
         <input id="email" type="text" placeholder="E-mail" />
-        <input id="old_password" type="text" placeholder="Senha antiga" />
-        <input id="new_password" type="text" placeholder="Nova senha" />
+        <input id="old_password" type="password" placeholder="Senha antiga" />
+        <input id="new_password" type="password" placeholder="Nova senha" />
         <input
           id="password_confirmation"
-          type="text"
+          type="password"
           placeholder="Confirmação da nova senha"
         />
-        <button onclick="treatments()" type="button">Update</button>
+        <button id="update" onclick="treatments()" type="button">Update</button>
       </form>
     </section>
 

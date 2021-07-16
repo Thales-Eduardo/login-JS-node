@@ -12,14 +12,16 @@ class ProfileUpdateServices {
       throw new Error('Esse e-mail já está em uso!.');
     }
 
-    const verificarPassword = currentContent.find(data =>
-      compareSync(oldPassword, data.password)
-    );
-
-    if (!verificarPassword) {
-      throw new Error(
-        'Para atualizar sua senha, informe sua antiga senha correta!'
+    if (password && oldPassword) {
+      const verificarPassword = currentContent.find(data =>
+        compareSync(oldPassword, data.password)
       );
+
+      if (!verificarPassword) {
+        throw new Error(
+          'Para atualizar sua senha, informe sua antiga senha correta!'
+        );
+      }
     }
 
     const user = currentContent.findIndex(data => data.id === id);

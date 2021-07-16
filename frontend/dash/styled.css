@@ -30,7 +30,7 @@ h1 {
 }
 
 header {
-  padding: 20px 0px;
+  padding: 20px 10px;
   width: 100%;
   height: 100px;
   background-color: #434246;
@@ -53,10 +53,12 @@ header {
   font-size: 20px;
   height: 40px;
   width: 80px;
+  border-radius: 20px;
+  border: 0;
+  background-color: #ec930e;
 }
 
 section {
-  /* background-color: #fff; */
   height: 89%;
   display: flex;
   flex-direction: column;
@@ -64,11 +66,113 @@ section {
   justify-content: center;
 }
 
+.image_user {
+  margin-bottom: 20px;
+}
+
+img {
+  width: 186px;
+  height: 186px;
+  border-radius: 50%;
+}
+
+label {
+  border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+#avatar {
+  display: none;
+}
+
 form {
   display: flex;
   flex-direction: column;
   padding: 12px;
-  border: 1px solid #fff;
   height: 420px;
   width: 320px;
+  margin-top: 10px;
+}
+
+#name {
+  height: 40px;
+  padding-left: 9px;
+  margin-bottom: 10px;
+  background-color: #312e38;
+  color: #fff;
+  border: 0;
+  border-bottom: 2px solid #fff;
+  font-size: 16px;
+}
+
+#email {
+  height: 40px;
+  padding-left: 9px;
+  margin-bottom: 10px;
+  background-color: #312e38;
+  color: #fff;
+  border: 0;
+  border-bottom: 2px solid #fff;
+  font-size: 16px;
+}
+
+#old_password {
+  height: 40px;
+  padding-left: 9px;
+  margin-bottom: 10px;
+  background-color: #312e38;
+  color: #fff;
+  border: 0;
+  border-bottom: 2px solid #fff;
+  font-size: 16px;
+}
+
+#new_password {
+  height: 40px;
+  padding-left: 9px;
+  margin-bottom: 10px;
+  background-color: #312e38;
+  color: #fff;
+  border: 0;
+  border-bottom: 2px solid #fff;
+  font-size: 16px;
+}
+
+#password_confirmation {
+  height: 40px;
+  padding-left: 9px;
+  margin-bottom: 10px;
+  background-color: #312e38;
+  color: #fff;
+  border: 0;
+  border-bottom: 2px solid #fff;
+  font-size: 16px;
+}
+
+#update {
+  height: 40px;
+  cursor: pointer;
+  margin-top: 20px;
+  border: 0;
+  border-radius: 20px;
+  background-color: #ec930e;
+}
+
+#name::placeholder,
+#email::placeholder,
+#old_password::placeholder,
+#new_password::placeholder,
+#password_confirmation::placeholder {
+  color: #fff;
+}
+
+#name:focus,
+#email:focus,
+#old_password:focus,
+#new_password:focus,
+#password_confirmation:focus {
+  border-color: #ec930e;
 }
