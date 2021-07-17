@@ -1,12 +1,14 @@
-import BCriptHashProvider from '../providers/bcryptjsProvider/BCriptHashProvider';
-import UuidProvider from '../providers/uuidProvider/UuidProvider';
-import Repository from '../repository/Repository';
-
 class CreateUserServices {
-  async execute({ name, email, password }) {
-    const currentContent = await Repository.findData();
+  constructor({ Repository, BCriptHashProvider, UuidProvider }) {
+    this.Repository = Repository;
+    this.BCriptHashProvider = BCriptHashProvider;
+    this.UuidProvider = UuidProvider;
+  }
 
-    const hashedPassword = await BCriptHashProvider.generateHash(password);
+  async execute({ name, email, password }) {
+    const currentContent = await this.Repository.findData();
+
+    const hashedPassword = await this.BCriptHashProvider.generateHash(password);
 
     const verificarEmail = currentContent.find(data => data.email === email);
 
@@ -15,7 +17,7 @@ class CreateUserServices {
     }
 
     const resposta = {
-      id: UuidProvider.generateUuid(),
+      id: this.UuidProvider.generateUuid(),
       name,
       email,
       password: hashedPassword,
@@ -24,7 +26,7 @@ class CreateUserServices {
 
     currentContent.push(resposta);
 
-    await Repository.saveData(currentContent);
+    await this.Repository.saveData(currentContent);
 
     return resposta;
   }

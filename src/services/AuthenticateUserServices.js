@@ -1,12 +1,14 @@
-import BCriptHashProvider from '../providers/bcryptjsProvider/BCriptHashProvider';
-import Repository from '../repository/Repository';
-
 class AuthenticateUserServices {
+  constructor({ BCriptHashProvider, Repository }) {
+    this.BCriptHashProvider = BCriptHashProvider;
+    this.Repository = Repository;
+  }
+
   async execute({ password, email }) {
-    const currentContent = await Repository.findData();
+    const currentContent = await this.Repository.findData();
 
     const verificarPassword = currentContent.find(data =>
-      BCriptHashProvider.compareHash(password, data.password)
+      this.BCriptHashProvider.compareHash(password, data.password)
     );
 
     if (!verificarPassword) {

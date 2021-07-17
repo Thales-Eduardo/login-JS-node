@@ -1,9 +1,11 @@
-import BCriptHashProvider from '../providers/bcryptjsProvider/BCriptHashProvider';
-import Repository from '../repository/Repository';
-
 class ProfileUpdateServices {
+  constructor({ BCriptHashProvider, Repository }) {
+    this.BCriptHashProvider = BCriptHashProvider;
+    this.Repository = Repository;
+  }
+
   async execute({ id, name, email, oldPassword, password }) {
-    const currentContent = await Repository.findData();
+    const currentContent = await this.Repository.findData();
 
     const verificarEmail = currentContent.find(data => data.email === email);
 
@@ -13,7 +15,7 @@ class ProfileUpdateServices {
 
     if (password && oldPassword) {
       const verificarPassword = currentContent.find(data =>
-        BCriptHashProvider.compareHash(oldPassword, data.password)
+        this.BCriptHashProvider.compareHash(oldPassword, data.password)
       );
 
       if (!verificarPassword) {
@@ -29,7 +31,7 @@ class ProfileUpdateServices {
       throw new Error('Esse usário não existe.');
     }
 
-    const hashedPassword = await BCriptHashProvider.generateHash(password);
+    const hashedPassword = await this.BCriptHashProvider.generateHash(password);
 
     let avatar = 'defalt';
 
@@ -41,7 +43,7 @@ class ProfileUpdateServices {
       avatar: avatar ? currentContent[user].avatar : avatar,
     };
 
-    await Repository.saveData(currentContent);
+    await this.Repository.saveData(currentContent);
 
     return { id, name, email, password };
   }

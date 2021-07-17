@@ -2,7 +2,7 @@ import { hash, compareSync } from 'bcryptjs';
 
 class BCriptHashProvider {
   async generateHash(payload) {
-    return hash(payload, 8);
+    return await hash(payload, 8);
   }
 
   compareHash(payload, hashed) {

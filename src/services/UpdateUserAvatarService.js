@@ -1,14 +1,16 @@
-import DiscStorageRepository from '../providers/multerProvider/DiscStorageProvider';
-import Repository from '../repository/Repository';
-
 class UpdateUserAvatarService {
+  constructor({ BCriptHashProvider, Repository }) {
+    this.BCriptHashProvider = BCriptHashProvider;
+    this.Repository = Repository;
+  }
+
   async execute({ id, avatar }) {
-    const content = await Repository.findData();
+    const content = await this.Repository.findData();
 
     const checkAvatar = content.find(data => data.avatar);
 
     if (checkAvatar.avatar) {
-      await DiscStorageRepository.deleteFile(checkAvatar.avatar);
+      await this.DiscStorageRepository.deleteFile(checkAvatar.avatar);
     }
 
     const user = content.findIndex(data => data.id === id);
@@ -19,7 +21,7 @@ class UpdateUserAvatarService {
 
     content[user].avatar = avatar;
 
-    await Repository.saveData(content);
+    await this.Repository.saveData(content);
 
     return checkAvatar;
   }
