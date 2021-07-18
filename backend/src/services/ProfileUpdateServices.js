@@ -1,3 +1,5 @@
+import AppError from '../errors/AppError';
+
 class ProfileUpdateServices {
   constructor({ BCriptHashProvider, Repository }) {
     this.BCriptHashProvider = BCriptHashProvider;
@@ -19,7 +21,7 @@ class ProfileUpdateServices {
       );
 
       if (!verificarPassword) {
-        throw new Error(
+        throw new AppError(
           'Para atualizar sua senha, informe sua antiga senha correta!'
         );
       }
@@ -28,19 +30,17 @@ class ProfileUpdateServices {
     const user = currentContent.findIndex(data => data.id === id);
 
     if (user < 0) {
-      throw new Error('Esse usário não existe.');
+      throw new AppError('Esse usário não existe.');
     }
 
     const hashedPassword = await this.BCriptHashProvider.generateHash(password);
-
-    let avatar = 'defalt';
 
     currentContent[user] = {
       id,
       name: name ? name : currentContent[user].name,
       email: email ? email : currentContent[user].email,
       password: password ? hashedPassword : currentContent[user].password,
-      avatar: avatar ? currentContent[user].avatar : avatar,
+      avatar: currentContent[user].avatar,
     };
 
     await this.Repository.saveData(currentContent);

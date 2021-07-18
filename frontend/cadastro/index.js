@@ -36,8 +36,9 @@ async function EnviarCadastro(resposta) {
       }
     })
     .catch(error => {
-      if (error) {
-        alert('Esse email já existe! ' + error);
+      if (error.response) {
+        const { message } = error.response.data;
+        alert(message);
         button.innerHTML = 'Enviar';
       }
     });

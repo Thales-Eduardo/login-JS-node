@@ -1,16 +1,16 @@
 [
   {
     "id": "84453df7-1dc5-45e4-b743-9c6e44a3e930",
-    "name": "thales",
+    "name": "Thales Eduardo",
     "email": "thalesdev22@gmail.com",
     "password": "$2a$08$U75GLpuglJLK8Tj7GrR3t.rebRMuiE/pQpCm7RApZYEOXe1AXsiJu",
-    "avatar": "1c7945cd7c74b6d53f70-8f5f62d5b40af8b6e30ffb33982ac881.jpg"
+    "avatar": "default"
   },
   {
-    "id": "4d26c7f8-8ef8-4921-ba4b-2fc9c80283e4",
-    "name": "thales",
+    "id": "0b19c887-9d73-41e0-91b0-035e26c31f71",
+    "name": "tata",
     "email": "thalesdev@gmail.com",
-    "password": "$2a$08$lGOUG/mtB9UE3qcw5sb/4e6MH5sS75RvThU2Cz3ufBZsgmWtnMaAy",
+    "password": "$2a$08$pzLlpfBDv7y7h1sUEw4p8Obg13baSj98xq19HBUwqjX.QBuB72OaC",
     "avatar": "default"
   }
 ]

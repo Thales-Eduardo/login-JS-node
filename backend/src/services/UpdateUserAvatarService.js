@@ -1,13 +1,17 @@
+import AppError from '../errors/AppError';
+
 class UpdateUserAvatarService {
-  constructor({ BCriptHashProvider, Repository }) {
-    this.BCriptHashProvider = BCriptHashProvider;
+  constructor({ BCriptHashProvider, Repository, DiscStorageRepository }) {
     this.Repository = Repository;
+    this.DiscStorageRepository = DiscStorageRepository;
+    this.BCriptHashProvider = BCriptHashProvider;
+    this.AppError = AppError;
   }
 
   async execute({ id, avatar }) {
     const content = await this.Repository.findData();
 
-    const checkAvatar = content.find(data => data.avatar);
+    const checkAvatar = content.find(data => data.id === id);
 
     if (checkAvatar.avatar) {
       await this.DiscStorageRepository.deleteFile(checkAvatar.avatar);
@@ -16,7 +20,7 @@ class UpdateUserAvatarService {
     const user = content.findIndex(data => data.id === id);
 
     if (user < 0) {
-      throw new Error('Usuário não encontrado.');
+      throw new AppError('Usuário não encontrado.', 404);
     }
 
     content[user].avatar = avatar;

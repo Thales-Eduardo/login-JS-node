@@ -25,6 +25,9 @@ function preview(name, email, avatar) {
   document.querySelector('#user').innerHTML += ` ${name} ✌`;
   const img = document.querySelector('img');
   img.alt = `${name}`;
+  if (avatar === 'default') {
+    return (img.src = `https://image.flaticon.com/icons/png/512/747/747968.png`);
+  }
   img.src = `http://localhost:3333/files/${avatar}`;
 }
 
@@ -83,12 +86,14 @@ async function sendData(resposta) {
     .then(res => {
       alert('update confirmado!');
       const { name, email, id, avatar } = res.data;
+      console.log(name, email, id, avatar);
       saveUpdateData({ name, email, id, avatar });
       verificar();
     })
     .catch(error => {
-      if (error) {
-        alert('Erro no update.');
+      if (error.response) {
+        const { message } = error.response.data;
+        alert(message);
       }
     });
 }
@@ -117,7 +122,10 @@ async function sendAvatar(avatar) {
       saveUpdateData({ name, email, id, avatar });
       verificar();
     })
-    .catch(() => {
-      alert('error');
+    .catch(error => {
+      if (error.response) {
+        const { message } = error.response.data;
+        alert(message);
+      }
     });
 }

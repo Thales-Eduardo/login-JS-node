@@ -32,8 +32,9 @@ async function sendData(resposta) {
       verificar();
     })
     .catch(error => {
-      if (error) {
-        alert('E-mail ou senha esta, incorreto.');
+      if (error.response) {
+        const { message } = error.response.data;
+        alert(message);
       }
     });
 }

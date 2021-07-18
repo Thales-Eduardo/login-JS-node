@@ -1,3 +1,5 @@
+import AppError from '../errors/AppError';
+
 class AuthenticateUserServices {
   constructor({ BCriptHashProvider, Repository }) {
     this.BCriptHashProvider = BCriptHashProvider;
@@ -12,13 +14,13 @@ class AuthenticateUserServices {
     );
 
     if (!verificarPassword) {
-      throw new Error('E-mail ou senha esta, incorreto.');
+      throw new AppError('E-mail ou senha esta, incorreto.', 404);
     }
 
     const verificarEmail = currentContent.find(data => data.email === email);
 
     if (!verificarEmail) {
-      throw new Error('E-mail ou senha esta, incorreto.');
+      throw new AppError('E-mail ou senha esta, incorreto.', 404);
     }
 
     return verificarEmail;

@@ -1,3 +1,5 @@
+import AppError from '../errors/AppError';
+
 class CreateUserServices {
   constructor({ Repository, BCriptHashProvider, UuidProvider }) {
     this.Repository = Repository;
@@ -13,7 +15,7 @@ class CreateUserServices {
     const verificarEmail = currentContent.find(data => data.email === email);
 
     if (verificarEmail) {
-      throw new Error('Esse email já existe!');
+      throw new AppError('Esse email já existe!');
     }
 
     const resposta = {
