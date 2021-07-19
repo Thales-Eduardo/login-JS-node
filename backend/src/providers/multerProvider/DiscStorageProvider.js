@@ -2,7 +2,6 @@ import { stat, rename, unlink } from 'fs/promises';
 import path from 'path';
 
 import uploadConfig from '../../config/upload';
-
 class DiscStorageProvider {
   async saveFile(file) {
     await rename(path.resolve(uploadConfig.directory, file));

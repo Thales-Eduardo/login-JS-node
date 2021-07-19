@@ -11,23 +11,27 @@ class UpdateUserAvatarService {
   async execute({ id, avatar }) {
     const content = await this.Repository.findData();
 
-    const checkAvatar = content.find(data => data.id === id);
-
-    if (checkAvatar.avatar) {
-      await this.DiscStorageRepository.deleteFile(checkAvatar.avatar);
-    }
-
-    const user = content.findIndex(data => data.id === id);
+    const user = await this.Repository.findByIndexId(id);
 
     if (user < 0) {
       throw new AppError('Usuário não encontrado.', 404);
+    }
+
+    const checkAvatar = await this.Repository.findById(id);
+
+    if (checkAvatar.avatar) {
+      await this.DiscStorageRepository.deleteFile(checkAvatar.avatar);
     }
 
     content[user].avatar = avatar;
 
     await this.Repository.saveData(content);
 
-    return checkAvatar;
+    const response = await this.Repository.findById(id);
+
+    delete response.password;
+
+    return response;
   }
 }
 

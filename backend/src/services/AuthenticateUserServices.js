@@ -1,29 +1,34 @@
 import AppError from '../errors/AppError';
 
 class AuthenticateUserServices {
-  constructor({ BCriptHashProvider, Repository }) {
+  constructor({ BCriptHashProvider, Repository, jwtTokenProvider }) {
     this.BCriptHashProvider = BCriptHashProvider;
     this.Repository = Repository;
+    this.jwtTokenProvider = jwtTokenProvider;
   }
 
   async execute({ password, email }) {
-    const currentContent = await this.Repository.findData();
+    const user = await this.Repository.findByEmail(email);
 
-    const verificarPassword = currentContent.find(data =>
-      this.BCriptHashProvider.compareHash(password, data.password)
+    if (!user) {
+      throw new AppError('E-mail ou senha esta, incorreto.', 404);
+    }
+
+    const check = await this.BCriptHashProvider.compareHash(
+      password,
+      user.password
     );
 
-    if (!verificarPassword) {
+    if (!check) {
       throw new AppError('E-mail ou senha esta, incorreto.', 404);
     }
 
-    const verificarEmail = currentContent.find(data => data.email === email);
+    const token = this.jwtTokenProvider.generateToken(user.id);
 
-    if (!verificarEmail) {
-      throw new AppError('E-mail ou senha esta, incorreto.', 404);
-    }
-
-    return verificarEmail;
+    return {
+      user,
+      token,
+    };
   }
 }
 

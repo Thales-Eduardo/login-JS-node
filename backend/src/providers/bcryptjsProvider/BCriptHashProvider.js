@@ -1,12 +1,12 @@
-import { hash, compareSync } from 'bcryptjs';
+import { hash, compare } from 'bcryptjs';
 
 class BCriptHashProvider {
   async generateHash(payload) {
     return await hash(payload, 8);
   }
 
-  compareHash(payload, hashed) {
-    return compareSync(payload, hashed);
+  async compareHash(payload, hashed) {
+    return await compare(payload, hashed);
   }
 }
 

@@ -5,10 +5,12 @@ import ProfileUpdateServices from '../services/ProfileUpdateServices';
 import BCriptHashProvider from '../providers/bcryptjsProvider/BCriptHashProvider';
 import Repository from '../repository/Repository';
 
+import ensureAuthentication from '../middleware/ensureAuthentication';
+
 const profile = Router();
 
-profile.put('/:id', async (req, res) => {
-  const { id } = req.params;
+profile.put('/', ensureAuthentication, async (req, res) => {
+  const { id } = req.userId;
   const { name, email, oldPassword, password } = req.body;
 
   const profileUpdate = new ProfileUpdateServices({

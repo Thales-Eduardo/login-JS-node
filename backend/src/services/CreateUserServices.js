@@ -12,7 +12,7 @@ class CreateUserServices {
 
     const hashedPassword = await this.BCriptHashProvider.generateHash(password);
 
-    const verificarEmail = currentContent.find(data => data.email === email);
+    const verificarEmail = await this.Repository.findByEmail(email);
 
     if (verificarEmail) {
       throw new AppError('Esse email já existe!');

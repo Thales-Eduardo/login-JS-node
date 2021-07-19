@@ -9,15 +9,16 @@ class ProfileUpdateServices {
   async execute({ id, name, email, oldPassword, password }) {
     const currentContent = await this.Repository.findData();
 
-    const verificarEmail = currentContent.find(data => data.email === email);
+    const verificarEmail = await this.Repository.findByEmail(email);
 
     if (verificarEmail && verificarEmail.id !== id) {
       throw new Error('Esse e-mail já está em uso!.');
     }
 
     if (password && oldPassword) {
-      const verificarPassword = currentContent.find(data =>
-        this.BCriptHashProvider.compareHash(oldPassword, data.password)
+      const verificarPassword = await this.BCriptHashProvider.compareHash(
+        oldPassword,
+        verificarEmail.password
       );
 
       if (!verificarPassword) {
@@ -27,7 +28,7 @@ class ProfileUpdateServices {
       }
     }
 
-    const user = currentContent.findIndex(data => data.id === id);
+    const user = await this.Repository.findByIndexId(id);
 
     if (user < 0) {
       throw new AppError('Esse usário não existe.');
