@@ -1,10 +1,14 @@
 # Login e cadastro de usuário apenas com javascript puro ❤.
 
-Fiz esse exercício apenas para praticar um pouco🐱‍💻.
+Fiz esse exercício apenas para praticar um pouco, acabei me empolgando😂🐱‍💻.
 
 - Os dados são persistidos em um arquivo .json.
 
 - O back-end e separado do front-end.
+
+- Autenticação JWT.
+
+- Middleware de autenticação
 
 ---
 
@@ -26,6 +30,21 @@ class Repository {
     const currentFile = JSON.stringify(data);
     await writeFile(fileName, currentFile, "utf-8");
     return data;
+  }
+
+  async findById(id) {
+    const all = await this.findData();
+    return all.find((item) => item.id === id);
+  }
+
+  async findByEmail(email) {
+    const all = await this.findData();
+    return all.find((item) => item.email === email);
+  }
+
+  async findByIndexId(id) {
+    const all = await this.findData();
+    return all.findIndex((item) => item.id === id);
   }
 }
 

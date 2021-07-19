@@ -1,10 +1,8 @@
 function verificar() {
   const name = localStorage.getItem('$NAME');
   const email = localStorage.getItem('$EMAIL');
-  const id = localStorage.getItem('$ID');
   const avatar = localStorage.getItem('$AVATAR');
-
-  if (name === null && email === null && id === null && avatar === null) {
+  if (name === null && email === null && avatar === null) {
     location.href = '../login/index.html';
   }
   preview(name, email, avatar);
@@ -16,6 +14,7 @@ function sair() {
   localStorage.removeItem('$EMAIL');
   localStorage.removeItem('$ID');
   localStorage.removeItem('$AVATAR');
+  localStorage.removeItem('$TOKEN');
   verificar();
 }
 
@@ -80,14 +79,14 @@ function treatments() {
 }
 
 async function sendData(resposta) {
-  const id = localStorage.getItem('$ID');
+  const token = localStorage.getItem('$TOKEN');
+  axios.defaults.headers.authorization = `Bearer ${token}`;
   await axios
-    .put(`http://localhost:3333/profile/${id}`, resposta)
+    .put(`http://localhost:3333/profile`, resposta)
     .then(res => {
       alert('update confirmado!');
-      const { name, email, id, avatar } = res.data;
-      console.log(name, email, id, avatar);
-      saveUpdateData({ name, email, id, avatar });
+      const { name, email, id } = res.data;
+      saveUpdateData({ name, email, id });
       verificar();
     })
     .catch(error => {
@@ -102,7 +101,9 @@ function saveUpdateData({ name, email, id, avatar }) {
   localStorage.setItem('$NAME', name);
   localStorage.setItem('$EMAIL', email);
   localStorage.setItem('$ID', id);
-  localStorage.setItem('$AVATAR', avatar);
+  if (avatar) {
+    localStorage.setItem('$AVATAR', avatar);
+  }
 }
 
 function image(e) {
@@ -114,13 +115,13 @@ function image(e) {
 }
 
 async function sendAvatar(avatar) {
-  const id = localStorage.getItem('$ID');
+  const token = localStorage.getItem('$TOKEN');
+  axios.defaults.headers.authorization = `Bearer ${token}`;
   await axios
-    .patch(`http://localhost:3333/avatar/${id}`, avatar)
+    .patch(`http://localhost:3333/avatar`, avatar)
     .then(res => {
       const { name, email, id, avatar } = res.data;
       saveUpdateData({ name, email, id, avatar });
-      verificar();
     })
     .catch(error => {
       if (error.response) {
