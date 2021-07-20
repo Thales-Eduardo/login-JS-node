@@ -8,11 +8,29 @@ Fiz esse exercício apenas para praticar um pouco, acabei me empolgando😂🐱�
 
 - Autenticação JWT.
 
-- Middleware de autenticação
+- Middleware de autenticação.
+
+- Inversão de Dependência.
 
 ---
 
-# Código para listar e salvar dados no arquivo.
+# Estrutura das pastas back-end.
+
+Obs. São as mais importantes, para o intendimento da estrutura do projeto.
+
+- controller = Sera responsável por receber as requisições, enviar os dados da requisição para o service, da ao services as dependências que ele irar usar, e de enviar a resposta.
+
+- providers = São todas as dependências, que a aplicação ira precisar.
+
+- Repository = Sera responsável por fazer todas as operações no `database`.
+
+- services = Aqui sera às regras de negócio da aplicação.
+
+- middleware = Middleware de autenticação.
+
+---
+
+# Código para listar e salvar dados no arquivo e as buscas no database.
 
 ```js
 import { readFile, writeFile } from "fs/promises";
