@@ -93,6 +93,7 @@ async function sendData(resposta) {
       if (error.response) {
         const { message } = error.response.data;
         alert(message);
+        sair();
       }
     });
 }
@@ -127,6 +128,7 @@ async function sendAvatar(avatar) {
       if (error.response) {
         const { message } = error.response.data;
         alert(message);
+        sair();
       }
     });
 }
