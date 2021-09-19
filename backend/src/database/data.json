@@ -1,1 +1,9 @@
-[{"id":"84453df7-1dc5-45e4-b743-9c6e44a3e930","name":"Thales Eduardo","email":"thalesdev22@gmail.com","password":"$2a$08$U75GLpuglJLK8Tj7GrR3t.rebRMuiE/pQpCm7RApZYEOXe1AXsiJu","avatar":"default"}]
+[
+  {
+    "id": "84453df7-1dc5-45e4-b743-9c6e44a3e930",
+    "name": "Thales Eduardo",
+    "email": "thalesdev22@gmail.com",
+    "password": "$2a$08$U75GLpuglJLK8Tj7GrR3t.rebRMuiE/pQpCm7RApZYEOXe1AXsiJu",
+    "avatar": "default"
+  }
+]
